@@ -15,10 +15,16 @@ public class DeccUser implements IDeccUser{
 	public DeccUser() {
 		try{
 			decc = new DeccInstance(4242,  "", this);
+			decc.start();
 		}catch(IOException e){
 			e.printStackTrace();
 			System.exit(-1);
 		}
+	}
+	
+	public void stop(){
+		log("Closing");
+		decc.close();
 	}
 	
 	private String getCurrentDate(){
