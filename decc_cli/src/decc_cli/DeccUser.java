@@ -5,16 +5,17 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import decc.DeccInstance;
-import decc.IDeccUser;
+import decc.DeccBuilder;
+import decc.ui.IDecc;
+import decc.ui.IDeccUser;
 
 public class DeccUser implements IDeccUser{
 
-	private DeccInstance decc;
+	private IDecc decc;
 	
 	public DeccUser() {
 		try{
-			decc = new DeccInstance(4242,  "", this);
+			decc = DeccBuilder.getDefault(this);
 			decc.start();
 		}catch(IOException e){
 			e.printStackTrace();
@@ -25,6 +26,10 @@ public class DeccUser implements IDeccUser{
 	public void stop(){
 		log("Closing");
 		decc.close();
+	}
+	
+	public void interpretCmd(){
+		
 	}
 	
 	private String getCurrentDate(){
