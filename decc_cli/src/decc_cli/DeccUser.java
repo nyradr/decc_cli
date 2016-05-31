@@ -1,6 +1,5 @@
 package decc_cli;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,7 +16,7 @@ public class DeccUser implements IDeccUser{
 		try{
 			decc = DeccBuilder.getDefault(this);
 			decc.start();
-		}catch(IOException e){
+		}catch(Exception e){
 			e.printStackTrace();
 			System.exit(-1);
 		}
@@ -60,6 +59,11 @@ public class DeccUser implements IDeccUser{
 	@Override
 	public void onComEnd(String comid) {
 		log("Communication closed : " + comid);
+	}
+	
+	@Override
+	public void onComFail(String comid, String target) {
+		log("Communication failed : " + comid + " : " + target);
 	}
 
 	@Override
