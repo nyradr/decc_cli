@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import decc.DeccBuilder;
+import decc.accounts.Account;
 import decc.ui.IDecc;
 import decc.ui.IDeccUser;
 
@@ -12,9 +13,11 @@ public class DeccUser implements IDeccUser{
 
 	private IDecc decc;
 	
-	public DeccUser() {
+	public DeccUser(String uname) {
 		try{
-			decc = DeccBuilder.getDefault(this);
+			Account acc = Account.create(uname, 1024);
+			
+			decc = DeccBuilder.getDecc(4242, acc, this);
 			decc.start();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -77,7 +80,7 @@ public class DeccUser implements IDeccUser{
 	}
 
 	@Override
-	public void onMess(String comid, String mess) {
+	public void onMess(String comid, String mess, boolean verified) {
 		log("Message received : " + comid);
 	}
 

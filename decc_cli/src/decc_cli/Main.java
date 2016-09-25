@@ -8,8 +8,12 @@ import java.nio.Buffer;
 public class Main {
 	
 	public static void main(String [] a){
-		DeccUser decc = new DeccUser();
-		
+		String name = "decccli";
+		if(a.length > 0)
+			name = a[0];
+			
+		DeccUser decc = new DeccUser(name);
+	
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			@Override
 			public void run() {
